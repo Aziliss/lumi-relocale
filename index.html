@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lumière Locale — CinéMatch : jeu de programmation cinéma et programme fidélité." />
+  <title>Lumière Locale — CinéMatch</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <div class="brand">
+      <div class="logo">🎬</div>
+      <div>
+        <strong>Lumière Locale</strong>
+        <small>CinéMatch</small>
+      </div>
+    </div>
+
+    <div class="nav-spacer"></div>
+
+    <div class="points-pill">
+      ⭐ Points <strong id="hudMiniPts">0</strong>
+    </div>
+
+    <button class="btn btn-primary small" id="navCta">Être contacté</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO V1 -->
+  <section class="hero">
+    <div class="eyebrow">● Le jeu · des bons films, aux bonnes salles</div>
+
+    <h1>Matche. Programme. <span>Gagne.</span></h1>
+
+    <p class="lead" id="heroLead">
+      Place les films dans les bonnes séances, fais grimper ton audience et débloque de vrais avantages.
+      Lumière Locale, version jeu.
+    </p>
+
+    <div class="role-zone">
+      <div class="role-toggle">
+        <button id="roleReal" class="active" type="button">🎥 Réalisateur·rice</button>
+        <button id="roleDiff" type="button">🏛️ Diffuseur / salle</button>
+      </div>
+
+      <p id="roleDesc" class="role-desc"></p>
+    </div>
+  </section>
+
+  <!-- ÉTAPES V1 -->
+  <section class="steps">
+    <article>
+      <span>1</span>
+      <strong>Choisis un film</strong>
+      <p>Analyse son genre, son public et ses tags.</p>
+    </article>
+
+    <article>
+      <span>2</span>
+      <strong>Pose-le sur le bon jour, dans la bonne salle</strong>
+      <p>La salle, le jour et l’horaire influencent l’audience.</p>
+    </article>
+
+    <article>
+      <span>3</span>
+      <strong>Lance ta semaine et gagne des étoiles</strong>
+      <p>Plus ta programmation est cohérente, plus tu gagnes de points.</p>
+    </article>
+  </section>
+
+  <!-- HUD JEU V2 -->
+  <section class="game-hud">
+    <article>
+      <small>Audience de la semaine</small>
+      <strong><span id="audTotal">?</span> spectateurs</strong>
+    </article>
+
+    <article>
+      <small>Séances programmées</small>
+      <strong id="sessCount">0/5</strong>
+      <div class="progress"><i id="weekProg"></i></div>
+    </article>
+
+    <article>
+      <small>Objectif</small>
+      <strong>Le meilleur programme possible</strong>
+    </article>
+  </section>
+
+  <!-- TEXTE ADAPTÉ PROFIL -->
+  <section class="role-card">
+    <h2 id="roleIntroTitle">Ton défi</h2>
+    <p id="roleIntroBody"></p>
+  </section>
+
+  <!-- CATALOGUE -->
+  <section class="block" id="game">
+    <div class="section-head">
+      <span>1</span>
+      <div>
+        <h2 id="catTitle">Ton catalogue · 5 films</h2>
+        <p>Clique un film ou glisse-le sur la grille.</p>
+      </div>
+    </div>
+
+    <div class="catalogue" id="catalogue"></div>
+  </section>
+
+  <!-- GRILLE JEU V2 -->
+  <section class="block">
+    <div class="section-head">
+      <span>2</span>
+      <div>
+        <h2>Ta semaine de programmation</h2>
+        <p>Les meilleures séances s’allument quand un film est sélectionné.</p>
+      </div>
+    </div>
+
+    <div class="schedule-wrapper">
+      <p class="hint" id="playHint">Place 5 séances pour lancer ta semaine.</p>
+      <div class="week-grid" id="weekGrid"></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="playBtn" disabled>Lancer la projection</button>
+      <button class="btn btn-ghost" id="clearBtn">Vider la grille</button>
+    </div>
+
+    <!-- RÉSULTAT V2 -->
+    <div class="result" id="result">
+      <small>Ton score final</small>
+      <div class="score"><span id="rScore">0</span><em>/100 pts</em></div>
+      <div class="stars" id="rStars">☆☆☆☆☆</div>
+
+      <p id="rVerdict"></p>
+
+      <div class="result-pills">
+        <span>🎟️ <strong id="rAudience">0</strong> spectateurs</span>
+        <span>⭐ <strong id="rPts">+0 points</strong></span>
+      </div>
+
+      <div class="badges" id="rBadges"></div>
+
+      <div class="convert">
+        <h3 id="convertTitle">Tu gères. On passe à du concret ?</h3>
+        <p id="convertSub"></p>
+        <button class="btn btn-primary" id="convertBtn">
+          <span id="convertCta">Être mis en relation</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIDÉLITÉ V1 -->
+  <section class="block">
+    <div class="section-head">
+      <span>3</span>
+      <div>
+        <h2>Ton niveau fidélité</h2>
+        <p>Les avantages évoluent selon ton profil.</p>
+      </div>
+    </div>
+
+    <div class="loyalty">
+      <div class="level">
+        <h3 id="tierName">—</h3>
+        <p><strong id="ptsNow">0</strong> points fidélité</p>
+
+        <div class="progress big">
+          <i id="lvlBar"></i>
+        </div>
+
+        <div class="level-labels">
+          <span id="lvlFrom">—</span>
+          <span id="lvlTo">—</span>
+        </div>
+      </div>
+
+      <div class="rewards" id="rewardStrip"></div>
+    </div>
+  </section>
+
+  <!-- POINTS -->
+  <section class="block">
+    <div class="section-head">
+      <span>+</span>
+      <div>
+        <h2>Cumule des points</h2>
+        <p>Chaque action peut faire progresser ton niveau.</p>
+      </div>
+    </div>
+
+    <div class="earn" id="earnTable"></div>
+  </section>
+
+</main>
+
+<!-- STICKY CTA -->
+<div class="sticky-cta" id="stickyCta">
+  <div class="wrap sticky-inner">
+    <div>
+      <strong id="stickyTitle">Prêt·e à passer à l’action ?</strong>
+      <p id="stickySub">Laisse tes coordonnées · +100 points offerts</p>
+    </div>
+    <button class="btn btn-primary" id="stickyBtn">Être contacté →</button>
+  </div>
+</div>
+
+<!-- MODAL CONTACT -->
+<div class="modal-back" id="modalBack">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">×</button>
+
+    <div id="modalLive">
+      <small id="formKicker">Espace</small>
+      <h2 id="modalTitle">Lance ton projet</h2>
+      <p id="formSub"></p>
+
+      <div class="perk">⭐ +100 points fidélité offerts</div>
+
+      <form id="contactForm">
+        <div class="form-grid">
+          <label>
+            Nom
+            <input id="f-name" type="text" required placeholder="Ton nom" />
+          </label>
+
+          <label>
+            <span id="orgLabel">Structure</span>
+            <input id="f-org" type="text" placeholder="—" />
+          </label>
+        </div>
+
+        <label>
+          Email
+          <input id="f-email" type="email" required placeholder="toi@exemple.fr" />
+        </label>
+
+        <label>
+          Message optionnel
+          <textarea id="f-msg" placeholder="Parle-nous de ton projet…"></textarea>
+        </label>
+
+        <button class="btn btn-primary full" type="submit">
+          <span id="formCtaTxt">Envoyer</span>
+        </button>
+      </form>
+    </div>
+
+    <div class="form-done" id="formDone">
+      <div class="check">✓</div>
+      <h2>Bien reçu !</h2>
+      <p id="formDoneMsg"></p>
+      <div class="perk">⭐ +100 points crédités</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Lumière Locale — CinéMatch · prototype gamifié · © 2026
+</footer>
+
+<div class="toast" id="toast">
+  <span id="toastTxt"></span>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
